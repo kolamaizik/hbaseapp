@@ -47,7 +47,11 @@ public class CreateTable {
                 { "3", "Dwayne", "McKee", "dwayne@fabrikam.com" },
                 { "4", "Rae", "Schroeder", "rae@contoso.com" },
                 { "5", "Rosalie", "burton", "rosalie@fabrikam.com"},
-                { "6", "Gabriela", "Ingram", "gabriela@contoso.com"} };
+                { "6", "Gabriela", "Ingram", "gabriela@contoso.com"},
+                { "7", "Rosalie", "burton", "rosalie@fabrikam.com"},
+                { "8", "Rosalie", "burton", "rosalie@fabrikam.com"},
+                { "9", "Rosalie", "burton", "rosalie@fabrikam.com"}
+        };
 
         HTable table = new HTable(config, "people");
 
