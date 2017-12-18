@@ -58,7 +58,7 @@ public class CreateTable {
         // Add each person to the table
         //   Use the `name` column family for the name
         //   Use the `contactinfo` column family for the email
-        for (int i = 0; i< people.length; i++) {
+        for (int i = 0; i < people.length; i++) {
             Put person = new Put(Bytes.toBytes(people[i][0]));
             person.add(Bytes.toBytes("name"), Bytes.toBytes("first"), Bytes.toBytes(people[i][1]));
             person.add(Bytes.toBytes("name"), Bytes.toBytes("last"), Bytes.toBytes(people[i][2]));
