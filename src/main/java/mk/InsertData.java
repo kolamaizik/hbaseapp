@@ -26,17 +26,9 @@ public class InsertData {
 
         // adding values using add() method
         // accepts column family name, qualifier/row name ,value
-        p.add(Bytes.toBytes("personal"),
-                Bytes.toBytes("name"),Bytes.toBytes("raju"));
-
-        p.add(Bytes.toBytes("personal"),
-                Bytes.toBytes("city"),Bytes.toBytes("hyderabad"));
-
-        p.add(Bytes.toBytes("professional"),Bytes.toBytes("designation"),
-                Bytes.toBytes("manager"));
-
-        p.add(Bytes.toBytes("professional"),Bytes.toBytes("salary"),
-                Bytes.toBytes("50000"));
+        p.add(Bytes.toBytes("name"), Bytes.toBytes("first"), Bytes.toBytes("Raju"));
+        p.add(Bytes.toBytes("name"), Bytes.toBytes("last"), Bytes.toBytes("Kui"));
+        p.add(Bytes.toBytes("contactinfo"), Bytes.toBytes("email"), Bytes.toBytes("manager@gmail.com"));
 
         // Saving the put Instance to the HTable.
         hTable.put(p);

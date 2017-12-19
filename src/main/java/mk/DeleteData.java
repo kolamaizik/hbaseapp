@@ -23,8 +23,8 @@ public class DeleteData {
 
         // Instantiating Delete class
         Delete delete = new Delete(Bytes.toBytes("row1"));
-        delete.deleteColumn(Bytes.toBytes("personal"), Bytes.toBytes("name"));
-        delete.deleteFamily(Bytes.toBytes("professional"));
+        delete.deleteColumn(Bytes.toBytes("name"), Bytes.toBytes("first"));
+        delete.deleteFamily(Bytes.toBytes("name"));
 
         // deleting the data
         table.delete(delete);

@@ -19,14 +19,15 @@ public class ScanTable {
         Configuration config = HBaseConfiguration.create();
 
         // Instantiating HTable class
-        HTable table = new HTable(config, "emp");
+        HTable table = new HTable(config, "people");
 
         // Instantiating the Scan class
         Scan scan = new Scan();
 
         // Scanning the required columns
-        scan.addColumn(Bytes.toBytes("personal"), Bytes.toBytes("name"));
-        scan.addColumn(Bytes.toBytes("personal"), Bytes.toBytes("city"));
+        scan.addColumn(Bytes.toBytes("name"), Bytes.toBytes("first"));
+        scan.addColumn(Bytes.toBytes("name"), Bytes.toBytes("last"));
+        scan.addColumn(Bytes.toBytes("contactinfo"), Bytes.toBytes("email"));
 
         // Getting the scan result
         ResultScanner scanner = table.getScanner(scan);
