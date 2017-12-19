@@ -12,7 +12,15 @@ public class DisableTable {
     public static void main(String args[]) throws MasterNotRunningException, IOException{
         String tblName = "people";
 
-        // Instantiating configuration class
+//    public String getTblName() {
+//        return tblName;
+//    }
+//
+//    public void setTblName(String tblName) {
+//        this.tblName = tblName;
+//    }
+
+    // Instantiating configuration class
         Configuration conf = HBaseConfiguration.create();
 
         // Instantiating HBaseAdmin class

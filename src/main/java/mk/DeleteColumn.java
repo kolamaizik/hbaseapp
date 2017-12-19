@@ -22,6 +22,6 @@ public class DeleteColumn {
 
         // Deleting a column family
         admin.deleteColumn(tableName, columnName);
-        System.out.println("coloumn deleted");
+        System.out.println("column deleted");
     }
 }

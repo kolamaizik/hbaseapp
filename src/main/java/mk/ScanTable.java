@@ -34,8 +34,8 @@ public class ScanTable {
 
         // Reading values from scan result
         for (Result result = scanner.next(); result != null; result = scanner.next())
-
             System.out.println("Found row : " + result);
+
         //closing the scanner
         scanner.close();
     }
