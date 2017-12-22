@@ -15,12 +15,12 @@
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
-            <version>1.4.0</version>
+            <version>1.1.2</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.apache.hbase</groupId>-->
-            <!--<artifactId>hbase</artifactId>-->
-            <!--<version>1.4.0</version>-->
+        <!--<groupId>org.apache.hbase</groupId>-->
+        <!--<artifactId>hbase</artifactId>-->
+        <!--<version>1.4.0</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.apache.phoenix</groupId>
@@ -38,14 +38,18 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.3.10.RELEASE</version>
-        </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/hbase</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>hbase-site.xml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
