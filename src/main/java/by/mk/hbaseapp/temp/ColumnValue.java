@@ -1,4 +1,4 @@
-package by.mk.hbaseapp.model;
+package by.mk.hbaseapp.temp;
 
 public class ColumnValue {
     private final String column;

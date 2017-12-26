@@ -1,4 +1,4 @@
-package by.mk.hbaseapp.model;
+package by.mk.hbaseapp.temp;
 
 import java.util.List;
 

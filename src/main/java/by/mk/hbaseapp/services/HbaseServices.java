@@ -1,67 +1,30 @@
 package by.mk.hbaseapp.services;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
-import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.client.HBaseAdmin;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.util.List;
 
-public class HbaseServices {
+public interface HbaseServices {
+    List<String> ListTables() throws IOException;
+    boolean tableExists(String tableName) throws IOException;
 
-    Configuration conf = HBaseConfiguration.create();
+//    void isTableEnable(String tableName) throws IOException;
+//    void isTableDisable(String tableName) throws IOException;
 
-    private final Logger log = LoggerFactory.getLogger(HBaseService.class);
+//    void CreateTable(String tableName) throws IOException;
+//    void CreateTable(String tableName, String familyName) throws IOException;
+//    void CreateTable(String tableName, List<String> familiesName) throws IOException;
+//    void CreateTable(String tableName, Map.Entry listFamiliesColumns) throws IOException;
 
+//    void DeleteTable(String tableName) throws IOException;
+//
+//    void DeleteColumn(String tableName, String familyName, String columnName) throws IOException;
+//    void AddColumn(String tableName, String familyName, String columnName) throws IOException;
+//    void ShutDownHbase() throws IOException;
 
-    public List<String> ListTables() throws IOException {
-        List<String> listTables = null;
-
-        try (HBaseAdmin admin = new HBaseAdmin(conf)) {
-            HTableDescriptor[] tableDescriptor = admin.listTables();
-
-            for (int i = 0; i < tableDescriptor.length; i++) {
-                listTables.add(tableDescriptor[i].getNameAsString());
-            }
-
-            log.info("List tables returned");
-        }
-
-        return listTables;
-    }
-
-    public boolean tableExists(String tableName) throws IOException {
-        HBaseAdmin admin = new HBaseAdmin(conf);
-
-        boolean bool = admin.tableExists(tableName);
-        return bool;
-    }
-
-    public void isTableEnable(String tableName) throws IOException {
-        HBaseAdmin admin = new HBaseAdmin(conf);
-
-        boolean bool = admin.isTableEnabled(tableName);
-
-        if (!bool) {
-            admin.enableTable(tableName);
-
-            log.info("Table {} is enable", tableName);
-        }
-    }
-
-    public void isTableDisable(String tableName) throws IOException {
-        HBaseAdmin admin = new HBaseAdmin(conf);
-
-        boolean bool = admin.isTableDisabled(tableName);
-
-        if (!bool) {
-            admin.disableTable(tableName);
-
-            log.info("Table {} is disable", tableName);
-        }
-    }
+    // DML commands
+    void InsertData(String tableName, byte[] rowId, String familyName, String columnName, byte[] value) throws IOException;
+    void DeleteData(String tableName, byte[] rowId) throws IOException;
+    void UpdateData(String tableName, byte[] rowId, String familyName, String columnName, byte[] value) throws IOException;
+    void ScanTable(String tableName, String familyName, String columnName) throws IOException;
 
 }
