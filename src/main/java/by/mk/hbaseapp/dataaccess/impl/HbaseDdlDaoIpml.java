@@ -6,7 +6,11 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.Delete;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.client.HTable;
+import org.apache.hadoop.hbase.util.Bytes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +19,7 @@ import java.util.List;
 
 public class HbaseDdlDaoIpml implements HbaseDdlDao {
 
-    HbaseTable hbaseTable;
+    private static HbaseTable hbaseTable;
 
     protected HbaseDdlDaoIpml(HbaseTable hbaseTable){
         this.hbaseTable = hbaseTable;
@@ -96,7 +100,17 @@ public class HbaseDdlDaoIpml implements HbaseDdlDao {
 
     @Override
     public void CreateTable(HbaseTable hbaseTable) throws IOException {
+        HBaseAdmin admin = new HBaseAdmin(conf);
+        try{
+            // create the table...
+            HTableDescriptor tableDescriptor = new HTableDescriptor(TableName.valueOf(hbaseTable.getTableName()));
 
+            admin.createTable(tableDescriptor);
+
+            LOGGER.info("Table {} created", hbaseTable.getTableName());
+        }catch (Exception e){
+            LOGGER.error("Error table create {}", hbaseTable.getTableName(), hbaseTable);
+        }
     }
 
     @Override
@@ -110,15 +124,52 @@ public class HbaseDdlDaoIpml implements HbaseDdlDao {
             admin.deleteTable(hbaseTable.getTableName());
 
             LOGGER.info("Deleted table {}", hbaseTable.getTableName());
-
-
         }catch (Exception e){
+            LOGGER.error("Error {} table delete", hbaseTable.getTableName());
 
         }
     }
 
     @Override
+    public void DeleteFamily(HbaseTable hbaseTable) throws IOException {
+        try {
+            // create an admin object using the config
+            HBaseAdmin admin = new HBaseAdmin(conf);
+            HTableDescriptor tableDescriptor = new HTableDescriptor(TableName.valueOf(hbaseTable.getTableName()));
+
+            tableDescriptor.removeFamily(hbaseTable.getFamilyName().getBytes());
+
+            LOGGER.info("{} family removed to {}", hbaseTable.getFamilyName(), hbaseTable.getTableName());
+        }catch (Exception e){
+            LOGGER.error("Error removed {} family to {}", hbaseTable.getFamilyName(), hbaseTable.getTableName());
+        }
+
+    }
+
+    @Override
+    public void AddFamily(HbaseTable hbaseTable) throws IOException {
+        try {
+            // create an admin object using the config
+            HBaseAdmin admin = new HBaseAdmin(conf);
+            HTableDescriptor tableDescriptor = new HTableDescriptor(TableName.valueOf(hbaseTable.getTableName()));
+
+            tableDescriptor.addFamily(new HColumnDescriptor(hbaseTable.getFamilyName()));
+
+            LOGGER.info("{} family added to {}", hbaseTable.getFamilyName(), hbaseTable.getTableName());
+        }catch (Exception e){
+            LOGGER.error("Error add {} family to {}", hbaseTable.getFamilyName(), hbaseTable.getTableName());
+        }
+
+    }
+
+    @Override
     public void DeleteColumn(HbaseTable hbaseTable) throws IOException {
+        // Instantiating HTable class
+        HTable table = new HTable(conf, hbaseTable.getTableName());
+
+        // Instantiating Delete class
+//        Delete delete = new Delete(Bytes.toBytes("row1"));
+//        delete.deleteColumn(Bytes.toBytes(hbaseTable.getFamilyName()), Bytes.toBytes(hbaseTable.getColumnName()));
 
     }
 

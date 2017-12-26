@@ -15,6 +15,9 @@ public interface HbaseDdlDao {
     void CreateTable(HbaseTable hbaseTable) throws IOException;
     void DeleteTable(HbaseTable hbaseTable) throws IOException;
 
+    void DeleteFamily(HbaseTable hbaseTable) throws IOException;
+    void AddFamily(HbaseTable hbaseTable) throws IOException;
+
     void DeleteColumn(HbaseTable hbaseTable) throws IOException;
     void AddColumn(HbaseTable hbaseTable) throws IOException;
 
