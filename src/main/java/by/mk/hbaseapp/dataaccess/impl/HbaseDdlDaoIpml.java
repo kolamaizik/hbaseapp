@@ -19,11 +19,11 @@ import java.util.List;
 
 public class HbaseDdlDaoIpml implements HbaseDdlDao {
 
-    private static HbaseTable hbaseTable;
+//    private static HbaseTable hbaseTable;
 
-    protected HbaseDdlDaoIpml(HbaseTable hbaseTable){
-        this.hbaseTable = hbaseTable;
-    }
+//    protected HbaseDdlDaoIpml(HbaseTable hbaseTable){
+//        this.hbaseTable = hbaseTable;
+//    }
 
     Configuration conf = HBaseConfiguration.create();
 
